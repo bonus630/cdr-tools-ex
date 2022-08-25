@@ -37,6 +37,7 @@ namespace CdrToolsEx
     {
 
         Corel.Interop.VGCore.Application dApp = null;
+        private Styles.StylesController stylesController;
         private cdrReferencePoint _rPoint;
 
         private string _uPath;
@@ -60,6 +61,7 @@ namespace CdrToolsEx
             {
                 InitializeComponent();
                 dApp = (Corel.Interop.VGCore.Application)app;
+                stylesController = new Styles.StylesController(this.Resources, this.dApp);
 
                 Load1();
 
@@ -71,13 +73,18 @@ namespace CdrToolsEx
 
                 _loadByCode = false;
                 LoadSettings();
+                this.Loaded += Docker_Loaded;
             }
             catch (Exception err)
             {
                 MessageBox.Show(err.ToString(), MName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void Docker_Loaded(object sender, RoutedEventArgs e)
+        {
+            stylesController.LoadThemeFromPreference();
 
+        }
         private void Load1()
         {
             try
