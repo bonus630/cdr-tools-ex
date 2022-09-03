@@ -1,3 +1,5 @@
 *.exe
 *.dll
 *.zip
+/.vs/CdrToolsEx/FileContentIndex
+*.suo
